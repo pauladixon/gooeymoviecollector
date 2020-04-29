@@ -5,7 +5,11 @@
 {% for movie in movies %}
   <div class="card">
     <div class="card-content">
-      <span class="card-title">{{ movie.title }}</span>
+      <span class="card-title">
+        <a href='/movies/{{ movie.id }}'>
+          {{ movie.title }}
+        </a>
+      </span>
       <p>streaming service: {{ movie.service }}</p>
       {% if movie.year > 2018 %}
         <p>year: current</p>
