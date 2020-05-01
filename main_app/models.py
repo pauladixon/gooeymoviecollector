@@ -6,7 +6,7 @@ class Service(models.Model):
     name = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.platform
+        return self.name
 
     def get_absolute_url(self):
         return reverse('services_detail', kwargs={'pk': self.id})
@@ -22,6 +22,9 @@ class Movie(models.Model):
 
     def get_absolute_url(self):
         return reverse('movies_detail', kwargs={'pk': self.id})
+
+    def seen_before(self):
+        return self.viewing_set.filter(date=date.today()).count() >= 1
 
 class Viewing(models.Model):
     date = models.DateField('viewing date')
