@@ -2,21 +2,20 @@
 
 {% block content %}
 <h4> gooey movies </h4>
-{% for movie in movies %}
-  <div class="card">
-    <div class="card-content">
-      <span class="card-title">
-        <a href='/movies/{{ movie.id }}'>
-          {{ movie.title }}
-        </a>
-      </span>
-      <p>streaming service: {{ movie.service }}</p>
-      {% if movie.year > 2018 %}
-        <p>year: current</p>
-      {% else %}
-        <p>year: {{ movie.year }}</p>
-      {% endif %}
-    </div>
-  </div>
+{% for movie in movie_list %}
+    <a href="{% url 'detail' movie.id %}">
+        <div class="card">
+            <div class="card-content">
+            <span class="card-title">
+                {{ movie.title }}
+            </span>
+            {% if movie.year > 2018 %}
+                <p>year: current</p>
+            {% else %}
+                <p>year: {{ movie.year }}</p>
+            {% endif %}
+            </div>
+        </div>
+    </a>
 {% endfor %}
 {% endblock %}

@@ -1,15 +1,107 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>movie details</h1>
-<div class="card">
-  <div class="card-content">
-    <span class="card-title">{{ movie.title }}</span>
-    <p>streaming service: {{ movie.service }}</p>
-    {% if movie.year > 2018 %}
-    <p>year: current</p>
-  {% else %}
-    <p>year: {{ movie.year }}</p>
-  {% endif %}
-  </div>
+
+<div class='row'>
+    <div class="col s6">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{ movie.title }}</span>
+                {% if movie.year > 2018 %}
+                    <p>year: current</p>
+                {% else %}
+                    <p>year: {{ movie.year }}</p>
+                {% endif %}
+            </div>
+            <div class='card-action'>
+                <a href="{% url 'movies_update' movie.id %}">edit</a>
+                <a href="{% url 'movies_delete' movie.id %}">delete</a>
+            </div>
+        </div>
+    </div>
+    <div class="col s6">
+        <form action="{% url 'add_viewing' movie.id %}" method="post">
+            {% csrf_token %}
+            {{ viewing_form.as_p}}
+            <input type="submit" class="btn" value='add viewing'>
+        </form>
+        <br>
+        {% if movie.seen_before %}
+            <div class='card-panel teal-text center-align'>you've seen {{movie.title}}</div>
+        {% else %}
+            <div class="card panel red-text center-align">you still need to see {{movie.title}}</div>
+        {% endif %}
+        <table class="striped">
+            <thead>
+                <tr><th>date</th></tr>
+            </thead>
+            <tbody>
+                {% for viewing in movie.viewing_set.all %}
+                    <tr>
+                        <td>{{viewing.date}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<hr>
+<div class="row">
+    <div class="col s6">
+        <h3>{{movie.title}}'s streaming services</h3>
+        {% for service in movie.services.all %}
+            {% for service in movie.services.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">
+                            {{service.name}}
+                        </span>
+                    </div>
+                    <div class="card-action">
+                        <form action="{% url 'unassoc_service' movie.id service.id %}" method='post'>
+                            {% csrf_token %}
+                            <button type='submit' class='btn'>remove</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5>no streaming services :-(</h5>
+        {% endif %}
+    </div>
+    <div class="col s6">
+        <h3>available streaming services</h3>
+        {% if services.count %}
+            {% for service in services.all %}
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">
+                            {{service.name}}
+                        </span>
+                    </div>
+                    <div class="card-action">
+                        <form action="{% url 'assoc_service' movie.id service.id %}" method='post'>
+                            {% csrf_token %}
+                            <button type='submit' class='btn'>add</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h5>{{movie.title}} is on all available streaming services</h5>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+    // create a datepicker
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+</script>
 {% endblock %}

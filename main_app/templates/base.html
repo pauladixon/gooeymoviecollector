@@ -19,7 +19,10 @@
         </ul>
         <ul class="right">
           <li><a href="/about">about</a></li>
-          <li><a href="/movies"> view all gooey movies</a></li>
+          <li><a href="{% url 'services_create' %}">add a service</a></li>
+          <li><a href="{% url 'services_index' %}">view all services</a></li>
+          <li><a href="{% url 'movies_create' %}">add a movie</a></li>
+          <li><a href="{% url 'index' %}"> view all gooey movies</a></li>
         </ul>
       </div>
     </nav>
