@@ -31,14 +31,15 @@ def movies_detail(request, movie_id):
   services_movie_doesnt_stream = Service.objects.exclude(id__in = movie.services.all().values_list('id'))
   viewing_form = ViewingForm()
   return render(request, 'movies/detail.html', {
-    'movie': movie, 'viewing_form': viewing_form, 
+    'movie': movie, 
+    'viewing_form': viewing_form, 
     'services': services_movie_doesnt_stream
   })
 
 def add_viewing(request, movie_id):
   form = ViewingForm(request.POST)
   if form.is_valid():
-    new_viewing =  form.save(commit=False)
+    new_viewing = form.save(commit=False)
     new_viewing.movie_id = movie_id
     new_viewing.save()
   return redirect('detail', movie_id=movie_id)
