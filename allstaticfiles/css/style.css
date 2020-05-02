@@ -1,0 +1,33 @@
+body  {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    color: sienna;
+    background-color: white;
+    font-family: 'Orator Std', Arial;
+    font-style: italic;
+}
+
+nav {
+    color: gray;
+    background-color: dimgray;
+    border: dotted whitesmoke 6px;
+    margin-bottom: 30px;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer.page-footer {
+    padding-top: 8px;
+    text-align: right;
+    background-color: white;
+    border: dotted whitesmoke 10px;
+    color: gray;
+}
+
+.card-content {
+    background-color: white;
+    border: dotted whitesmoke 10px;
+}

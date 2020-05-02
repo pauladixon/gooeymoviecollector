@@ -14,16 +14,22 @@
 <body>
   <header class='navbar-fixed'>
     <nav>
-      <div>
+      <div class="nav-wrapper">
         <ul>
           <li><a href="/" class="left">&nbsp;&nbsp;gooey movie collector</a></li>
         </ul>
         <ul class="right">
           <li><a href="{% url 'about' %}">about</a></li>
-          <li><a href="{% url 'services_create' %}">add a service</a></li>
-          <li><a href="{% url 'services_index' %}">view all services</a></li>
-          <li><a href="{% url 'movies_create' %}">add a movie</a></li>
-          <li><a href="{% url 'index' %}"> view all gooey movies</a></li>
+          {% if user.is_authenticated %}
+            <li><a href="{% url 'services_create' %}">add a service</a></li>
+            <li><a href="{% url 'services_index' %}">view all services</a></li>
+            <li><a href="{% url 'movies_create' %}">add a movie</a></li>
+            <li><a href="{% url 'index' %}"> view all gooey movies</a></li>
+            <li><a href="{% url 'logout' %}">logout</a></li>
+          {% else %}
+            <li><a href="{% url 'signup' %}">sign up</a></li>
+            <li><a href="{% url 'login' %}">log in</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>

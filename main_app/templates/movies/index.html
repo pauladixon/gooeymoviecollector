@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h4> gooey movies </h4>
+<h1> gooey movies </h1>
 {% for movie in movies %}
     <a href="{% url 'detail' movie.id %}">
         <div class="card">

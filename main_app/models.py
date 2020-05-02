@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date
+from django.contrib.auth.models import User
 
 LOCATIONS =  (
     ('H', 'home'),
@@ -22,6 +23,7 @@ class Movie(models.Model):
     title = models.CharField(max_length=100)
     year = models.IntegerField()
     services = models.ManyToManyField(Service)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -31,6 +33,7 @@ class Movie(models.Model):
 
     def seen_before(self):
         return self.viewing_set.count() >= 1
+
 
 class Viewing(models.Model):
     date = models.DateField('viewing date')

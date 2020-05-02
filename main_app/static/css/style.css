@@ -31,3 +31,7 @@ footer.page-footer {
     background-color: white;
     border: dotted whitesmoke 10px;
 }
+
+.btn {
+    background-color: dimgrey;
+}
