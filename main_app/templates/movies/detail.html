@@ -29,16 +29,17 @@
         {% if movie.seen_before %}
             <div class='card-panel teal-text center-align'>you've seen {{movie.title}}</div>
         {% else %}
-            <div class="card panel red-text center-align">you still need to see {{movie.title}}</div>
+            <div class="card-panel red-text center-align">you still need to see {{movie.title}}</div>
         {% endif %}
         <table class="striped">
             <thead>
-                <tr><th>date</th></tr>
+                <tr><th>date</th><th>location</th></tr>
             </thead>
             <tbody>
                 {% for viewing in movie.viewing_set.all %}
                     <tr>
                         <td>{{viewing.date}}</td>
+                        <td>{{viewing.get_location_display}}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -98,10 +99,14 @@
     // create a datepicker
     var dateEl = document.getElementById('id_date');
     M.Datepicker.init(dateEl, {
-      format: 'mm-dd-yyyy',
+      format: 'yyyy-mm-dd',
       defaultDate: new Date(),
       setDefaultDate: true,
       autoClose: true
     });
-</script>
-{% endblock %}
+  
+    // initialize the meal select
+    var selectEl = document.getElementById('id_location');
+    M.FormSelect.init(selectEl);
+  </script>
+  {% endblock %}

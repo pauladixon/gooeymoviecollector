@@ -1,6 +1,6 @@
 from django.contrib import admin
-from.models import Movie, Service, Viewing
+from.models import Movie, Viewing, Service
 
 admin.site.register(Movie)
-admin.site.register(Service)
 admin.site.register(Viewing)
+admin.site.register(Service)
