@@ -12,6 +12,7 @@ urlpatterns = [
   path('movies/<int:movie_id>/add_viewing/', views.add_viewing, name='add_viewing'),
   path('movies/<int:movie_id>/assoc_service/<int:service_id>/', views.assoc_service, name='assoc_service'),
   path('movies/<int:movie_id>/unassoc_service/<int:service_id>/', views.unassoc_service, name='unassoc_service'),
+  path('movies/<int:movie_id>/add_photo/', views.add_photo, name='add_photo'),
   path('services/', views.ServiceList.as_view(), name='services_index'),
   path('services/<int:pk>/', views.ServiceDetail.as_view(), name='services_detail'),
   path('services/create/', views.ServiceCreate.as_view(), name='services_create'),

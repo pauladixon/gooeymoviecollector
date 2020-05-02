@@ -126,3 +126,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "allstaticfiles")
 LOGIN_REDIRECT_URL = '/movies/'
 
 LOGOUT_REDIRECT_URL = '/'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_STORAGE_BUCKET_NAME = 'insert-your-bucket-name-here'
+AWS_S3_REGION_NAME = 'eu-west-2'
