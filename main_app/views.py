@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 import uuid
 import boto3
-from .models import Movie, Service
+from .models import Movie, Service, Photo
 from .forms import ViewingForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -11,18 +11,19 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
-BUCKET = 'catcollector'
+BUCKET = 'gooeymoviecollector'
 
 class MovieCreate(LoginRequiredMixin, CreateView):
   model = Movie
-  fields = '__all__'
+  fields = ['title', 'year']
+  
   def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)
 
 class MovieUpdate(LoginRequiredMixin, UpdateView):
   model = Movie
-  fields = '__all__'
+  fields = ['title', 'year']
 
 class MovieDelete(LoginRequiredMixin, DeleteView):
   model = Movie
